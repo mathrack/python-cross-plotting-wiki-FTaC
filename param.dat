@@ -1,0 +1,20 @@
+#
+# Global parameters of the present dataset
+#
+# This file is designed for the class "setup"
+#
+# All fields are mandatory
+#
+# nx (int)
+# ny (int)
+# dt (float)
+# Ra (float)
+# Pr (float)
+# Sub-folder with the results (str)
+#
+513
+257
+1e-4
+1e8
+0.71
+data
