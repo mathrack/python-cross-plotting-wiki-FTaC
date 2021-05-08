@@ -21,7 +21,8 @@
 #   marker edge color (str)
 #   marker every (int)
 #
-P
-1
-pmean.dat invdt
+PP
+2
+ppmean.dat invdt2
+pmean.dat pmean.dat -invdt2
 1.0

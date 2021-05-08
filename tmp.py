@@ -30,6 +30,10 @@ dwdx = quantity(case, "qty_dwdx.dat")
 dwdy = quantity(case, "qty_dwdy.dat")
 dwdz = quantity(case, "qty_dwdz.dat")
 
+dpdx = quantity(case, "qty_dpdx.dat")
+dpdy = quantity(case, "qty_dpdy.dat")
+dpdz = quantity(case, "qty_dpdz.dat")
+
 k = quantity(case, "qty_k.dat")
 uu = quantity(case, "qty_uu.dat")
 vv = quantity(case, "qty_vv.dat")
@@ -41,6 +45,7 @@ tt = quantity(case, "qty_phiphi.dat")
 ut = quantity(case, "qty_uphi.dat")
 vt = quantity(case, "qty_vphi.dat")
 wt = quantity(case, "qty_wphi.dat")
+pp = quantity(case, "qty_pp.dat")
 
 
 if False:
@@ -108,6 +113,14 @@ if True:
    fig, axs[0] = xyplot(dwdx, fig, axs[0])
    fig, axs[1] = xyplot(dwdy, fig, axs[1])
    fig, axs[2] = xyplot(dwdz, fig, axs[2])
+   fig.show()
+
+# Check grad(p)
+if True:
+   fig, axs = plt.subplots(1, 3, subplot_kw={"projection": "3d"})
+   fig, axs[0] = xyplot(dpdx, fig, axs[0])
+   fig, axs[1] = xyplot(dpdy, fig, axs[1])
+   fig, axs[2] = xyplot(dpdz, fig, axs[2])
    fig.show()
 
 #
