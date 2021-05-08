@@ -10,37 +10,37 @@ from module import *
 #
 # Read parameters for the present case
 #
-case = setup(r"param.dat")
+case = setup(r"case_ra_1e8_lin.dat")
 
-u = quantity(case, "u.dat")
-v = quantity(case, "v.dat")
-w = quantity(case, "w.dat")
-p = quantity(case, "p.dat")
-t = quantity(case, "phi.dat")
+u = quantity(case, "qty_u.dat")
+v = quantity(case, "qty_v.dat")
+w = quantity(case, "qty_w.dat")
+p = quantity(case, "qty_p.dat")
+t = quantity(case, "qty_phi.dat")
 
-dudx = quantity(case, "dudx.dat")
-dudy = quantity(case, "dudy.dat")
-dudz = quantity(case, "dudz.dat")
+dudx = quantity(case, "qty_dudx.dat")
+dudy = quantity(case, "qty_dudy.dat")
+dudz = quantity(case, "qty_dudz.dat")
 
-dvdx = quantity(case, "dvdx.dat")
-dvdy = quantity(case, "dvdy.dat")
-dvdz = quantity(case, "dvdz.dat")
+dvdx = quantity(case, "qty_dvdx.dat")
+dvdy = quantity(case, "qty_dvdy.dat")
+dvdz = quantity(case, "qty_dvdz.dat")
 
-dwdx = quantity(case, "dwdx.dat")
-dwdy = quantity(case, "dwdy.dat")
-dwdz = quantity(case, "dwdz.dat")
+dwdx = quantity(case, "qty_dwdx.dat")
+dwdy = quantity(case, "qty_dwdy.dat")
+dwdz = quantity(case, "qty_dwdz.dat")
 
-k = quantity(case, "k.dat")
-uu = quantity(case, "uu.dat")
-vv = quantity(case, "vv.dat")
-ww = quantity(case, "ww.dat")
-uv = quantity(case, "uv.dat")
-uw = quantity(case, "uw.dat")
-vw = quantity(case, "vw.dat")
-tt = quantity(case, "phiphi.dat")
-ut = quantity(case, "uphi.dat")
-vt = quantity(case, "vphi.dat")
-wt = quantity(case, "wphi.dat")
+k = quantity(case, "qty_k.dat")
+uu = quantity(case, "qty_uu.dat")
+vv = quantity(case, "qty_vv.dat")
+ww = quantity(case, "qty_ww.dat")
+uv = quantity(case, "qty_uv.dat")
+uw = quantity(case, "qty_uw.dat")
+vw = quantity(case, "qty_vw.dat")
+tt = quantity(case, "qty_phiphi.dat")
+ut = quantity(case, "qty_uphi.dat")
+vt = quantity(case, "qty_vphi.dat")
+wt = quantity(case, "qty_wphi.dat")
 
 
 if False:
