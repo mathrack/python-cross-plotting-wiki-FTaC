@@ -22,11 +22,13 @@ def get_scaling(case, term):
       scaling = np.float(term)
       return scaling
    except ValueError:
-      if term=="pr" or term=="Pr":
+      if term=="pr" or term=="Pr" or term=="PR":
          return case.pr
-      elif term=="ra" or term=="Ra":
+      elif term=="ra" or term=="Ra" or term=="RA":
          return case.ra
-      elif term=="rapr" or term=="RaPr" or term=="prra" or term=="PrRa":
+      if term=="re" or term=="Re" or term=="RE":
+         return np.sqrt(case.ra) / case.pr
+      elif term=="rapr" or term=="RaPr" or term=="RAPR" or term=="prra" or term=="PrRa" or term=="PRRA":
          return case.ra * case.pr
       if term=="dt" or term=="Dt" or term=="DT":
          return case.dt
@@ -36,6 +38,8 @@ def get_scaling(case, term):
          return 1./case.dt**2
       if term=="-invdt2" or term=="-invDt2" or term=="-invDT2":
          return -1./case.dt**2
+      if term=="invre" or term=="invRe" or term=="invRE":
+         return case.pr / np.sqrt(case.ra)
       else:
          print("Error when reading the scaling factor")
          return 1.
@@ -243,8 +247,8 @@ def iplot(i, qty, fig = None, ax = None):
    if qty.clr == None:
       ax.plot(qty.case.yy, qty.data[i,:], label=qty.name)
    else:
-      ax.plot(qty.case.yy, qty.data[i,:], label=qty.name, \
-                                          fmt=qty.clr, \
+      ax.plot(qty.case.yy, qty.data[i,:], qty.clr, \
+                                          label=qty.name, \
                                           markeredgecolor=qty.mrkedgeclr, \
                                           markerfacecolor=qty.mrkfaceclr, \
                                           markevery=qty.markevery)
@@ -269,8 +273,8 @@ def jplot(j, qty, fig = None, ax = None):
    if qty.clr == None :
       ax.plot(qty.case.xx, qty.data[:,j], label=qty.name)
    else:
-      ax.plot(qty.case.xx, qty.data[:,j], label=qty.name, \
-                                          fmt=qty.clr, \
+      ax.plot(qty.case.xx, qty.data[:,j], qty.clr, \
+                                          label=qty.name, \
                                           markeredgecolor=qty.mrkedgeclr, \
                                           markerfacecolor=qty.mrkfaceclr, \
                                           markevery=qty.markevery)

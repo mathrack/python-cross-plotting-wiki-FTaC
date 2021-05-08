@@ -1,0 +1,35 @@
+#
+# This fils is designed for the class "quantity"
+#
+# One quantity is the sum of terms
+# One term per line
+#
+# One term is a product of items
+# items are separated with one space
+# last item is a floating point number
+#
+# Mandatory fields
+#   name of the quantity (str)
+#   number of terms in this quantity (int)
+#   term1 (str)
+#   term2 (str)
+#   ...
+#   termn (str)
+#   scalar rescaling factor (float)
+# Optional fields
+#   linestyle (str)
+#   marker edge color (str)
+#   marker every (int)
+#
+# If the number of terms is > 0
+#   Each item is constructed from a binary 2D file
+# If the number of terms is < 0
+#   Each item is constructed from another quantity file
+#
+Buoy.
+-1
+qty_t.dat pr
+-1.0
+:b
+b
+5

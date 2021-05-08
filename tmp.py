@@ -16,7 +16,7 @@ u = quantity(case, "qty_u.dat")
 v = quantity(case, "qty_v.dat")
 w = quantity(case, "qty_w.dat")
 p = quantity(case, "qty_p.dat")
-t = quantity(case, "qty_phi.dat")
+t = quantity(case, "qty_t.dat")
 
 dudx = quantity(case, "qty_dudx.dat")
 dudy = quantity(case, "qty_dudy.dat")
@@ -45,12 +45,17 @@ ww = quantity(case, "qty_ww.dat")
 uv = quantity(case, "qty_uv.dat")
 uw = quantity(case, "qty_uw.dat")
 vw = quantity(case, "qty_vw.dat")
-tt = quantity(case, "qty_phiphi.dat")
-ut = quantity(case, "qty_uphi.dat")
-vt = quantity(case, "qty_vphi.dat")
-wt = quantity(case, "qty_wphi.dat")
+tt = quantity(case, "qty_tt.dat")
+ut = quantity(case, "qty_ut.dat")
+vt = quantity(case, "qty_vt.dat")
+wt = quantity(case, "qty_wt.dat")
 pp = quantity(case, "qty_pp.dat")
 
+u_buoy = quantity(case, "qty_bud_u_buoy.dat")
+u_conv = quantity(case, "qty_bud_u_conv.dat")
+u_diff = quantity(case, "qty_bud_u_diff.dat")
+u_gradp = quantity(case, "qty_bud_u_gradp.dat")
+u_turb = quantity(case, "qty_bud_u_turb.dat")
 
 if False:
    x = 0.1
@@ -76,6 +81,18 @@ if False:
    fig, axs = plt.subplots(1, 2)
    fig, axs[0] = xyctr(t, fig, axs[0])
    fig, axs[1] = xyctr(tt, fig, axs[1])
+   fig.show()
+
+# Check budget of <U>
+if True:
+   x=0.1
+   fig, ax = xplot(x, u_conv)
+   fig, ax = xplot(x, u_gradp, fig, ax)
+   fig, ax = xplot(x, u_diff, fig, ax)
+   fig, ax = xplot(x, u_turb, fig, ax)
+   fig, ax = xplot(x, u_buoy, fig, ax)
+   ax.set_ylabel(r"Budget of $\overline{U}$")
+   ax.legend()
    fig.show()
 
 # xyplot requires Axes3D
