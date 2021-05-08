@@ -67,6 +67,10 @@ w_diff = quantity(case, "qty_bud_w_diff.dat")
 w_gradp = quantity(case, "qty_bud_w_gradp.dat")
 w_turb = quantity(case, "qty_bud_w_turb.dat")
 
+t_conv = quantity(case, "qty_bud_t_conv.dat")
+t_diff = quantity(case, "qty_bud_t_diff.dat")
+t_turb = quantity(case, "qty_bud_t_turb.dat")
+
 if False:
    x = 0.1
    fig, ax = xplot(x, k)
@@ -124,6 +128,16 @@ if True:
    fig, ax = xplot(x, w_diff, fig, ax)
    fig, ax = xplot(x, w_turb, fig, ax)
    ax.set_ylabel(r"Budget of $\overline{W}$")
+   ax.legend()
+   fig.show()
+
+# Check budget of <T>
+if True:
+   x=0.1
+   fig, ax = xplot(x, t_conv)
+   fig, ax = xplot(x, t_diff, fig, ax)
+   fig, ax = xplot(x, t_turb, fig, ax)
+   ax.set_ylabel(r"Budget of $\overline{T}$")
    ax.legend()
    fig.show()
 
