@@ -73,10 +73,10 @@ t_turb = quantity(case, "qty_bud_t_turb.dat")
 
 if False:
    x = 0.1
-   fig, ax = xplot(x, k)
-   fig, ax = xplot(x, uu, fig, ax)
-   fig, ax = xplot(x, vv, fig, ax)
-   fig, ax = xplot(x, ww, fig, ax)
+   fig, ax = k.xplot(x)
+   fig, ax = uu.xplot(x, fig, ax)
+   fig, ax = vv.xplot(x, fig, ax)
+   fig, ax = ww.xplot(x, fig, ax)
    ax.set_ylabel("")
    ax.legend()
    fig.show()
@@ -98,7 +98,7 @@ if False:
    fig.show()
 
 # Check budget of <U>
-if True:
+if False:
    x=0.1
    fig, ax = xplot(x, u_conv)
    fig, ax = xplot(x, u_gradp, fig, ax)
@@ -110,7 +110,7 @@ if True:
    fig.show()
 
 # Check budget of <V>
-if True:
+if False:
    x=0.1
    fig, ax = xplot(x, v_conv)
    fig, ax = xplot(x, v_gradp, fig, ax)
@@ -121,7 +121,7 @@ if True:
    fig.show()
 
 # Check budget of <W>
-if True:
+if False:
    x=0.1
    fig, ax = xplot(x, w_conv)
    fig, ax = xplot(x, w_gradp, fig, ax)
@@ -132,7 +132,7 @@ if True:
    fig.show()
 
 # Check budget of <T>
-if True:
+if False:
    x=0.1
    fig, ax = xplot(x, t_conv)
    fig, ax = xplot(x, t_diff, fig, ax)
@@ -159,7 +159,7 @@ if False:
    fig.show()
 
 # Check grad(u)
-if True:
+if False:
    fig, axs = plt.subplots(1, 3, subplot_kw={"projection": "3d"})
    fig, axs[0] = xyplot(dudx, fig, axs[0])
    fig, axs[1] = xyplot(dudy, fig, axs[1])
@@ -167,7 +167,7 @@ if True:
    fig.show()
 
 # Check grad(v)
-if True:
+if False:
    fig, axs = plt.subplots(1, 3, subplot_kw={"projection": "3d"})
    fig, axs[0] = xyplot(dvdx, fig, axs[0])
    fig, axs[1] = xyplot(dvdy, fig, axs[1])
@@ -175,7 +175,7 @@ if True:
    fig.show()
 
 # Check grad(w)
-if True:
+if False:
    fig, axs = plt.subplots(1, 3, subplot_kw={"projection": "3d"})
    fig, axs[0] = xyplot(dwdx, fig, axs[0])
    fig, axs[1] = xyplot(dwdy, fig, axs[1])
@@ -183,7 +183,7 @@ if True:
    fig.show()
 
 # Check grad(p)
-if True:
+if False:
    fig, axs = plt.subplots(1, 3, subplot_kw={"projection": "3d"})
    fig, axs[0] = xyplot(dpdx, fig, axs[0])
    fig, axs[1] = xyplot(dpdy, fig, axs[1])
@@ -191,7 +191,7 @@ if True:
    fig.show()
 
 # Check grad(t)
-if True:
+if False:
    fig, axs = plt.subplots(1, 3, subplot_kw={"projection": "3d"})
    fig, axs[0] = xyplot(dtdx, fig, axs[0])
    fig, axs[1] = xyplot(dtdy, fig, axs[1])
