@@ -43,6 +43,8 @@ def get_scaling(case, term):
          return case.dt
       if term=="invdt" or term=="invDt" or term=="invDT":
          return 1./case.dt
+      if term=="-invdt" or term=="-invDt" or term=="-invDT":
+         return - 1./case.dt
       if term=="invdt2" or term=="invDt2" or term=="invDT2":
          return 1./case.dt**2
       if term=="-invdt2" or term=="-invDt2" or term=="-invDT2":
@@ -53,6 +55,8 @@ def get_scaling(case, term):
          return - case.pr / np.sqrt(case.ra)
       elif term=="invsqrtra" or term=="invsqrtRa" or term=="invsqrtRA":
          return 1./np.sqrt(case.ra)
+      elif term=="-invsqrtra" or term=="-invsqrtRa" or term=="-invsqrtRA":
+         return - 1./np.sqrt(case.ra)
       else:
          print("Error when reading the scaling factor")
          return 1.
