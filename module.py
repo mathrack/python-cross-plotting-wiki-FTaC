@@ -75,6 +75,8 @@ class setup:
       self.ra = np.float(ra)
       self.pr = np.float(pr)
       self.folder = np.str(data_folder)
+      # Here, RK3 final time step is hard-coded
+      self.dt = (4./12.) * self.dt # 3./4. - 5./12.
       # Here, the size of the domain in X is hard-coded
       self.xx = np.linspace(0., 1., nx)
       # Read the Y grid, the name of the file is hard-coded
