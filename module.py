@@ -291,9 +291,9 @@ class budget:
       ax.legend()
       return [fig, ax]
    def ijval(self, i, j):
-      return [term.ijval(i,j) for term in self.terms]
+      return np.array([term.ijval(i,j) for term in self.terms])
    def xyval(self, x, y):
-      return [term.xyval(x,y) for term in self.terms]
+      return np.array([term.xyval(x,y) for term in self.terms])
    #
    # Add basic and detailed description
    #
