@@ -5,12 +5,19 @@ import matplotlib.pyplot as plt
 from os.path import join as ospjoin
 
 #
-# Small function to read one binary field
+# Small function to read one field
 # Returns a 2D array of size (nx, ny)
 #
+# If file starts with "qty_", the quantity constructor is used
+#
+# Otherwise, a binary file is read
+#
 def read_one(case, file):
-   output = np.fromfile(ospjoin(case.folder, file)).reshape((case.ny, case.nx))
-   return output.transpose()
+   if file[:4]=="qty_":
+      output = quantity(case, file).data
+   else:
+      output = (np.fromfile(ospjoin(case.folder, file)).reshape((case.ny, case.nx))).transpose()
+   return output
 
 #
 # Small function to extract the scaling parameter
@@ -121,18 +128,13 @@ class quantity:
       # Name of the quantity for legends
       self.name = np.str(tmp[0])
       # Number of terms in the quantity
-      self.nterms = np.abs(np.int(tmp[1]))
-      # Build from binary files ?
-      self.build_from_binary = (np.int(tmp[1]) > 0)
+      self.nterms = np.int(tmp[1])
       # Put each term inside data
       for iterm in range(np.abs(self.nterms)):
          term = np.ones((case.nx, case.ny))
          list_term = tmp[iterm+2].split()
          for item in range(len(list_term)-1):
-            if self.build_from_binary:
-               term = term * read_one(case, np.str(list_term[item]))
-            else:
-               term = term * quantity(case, np.str(list_term[item])).data
+            term = term * read_one(case, np.str(list_term[item]))
          
          self.data = self.data + term * get_scaling(case, list_term[-1])
       
@@ -164,7 +166,6 @@ class quantity:
              "Setup of the quantity :" + "\n" \
              "   Config file : " + self.config + "\n" \
              "   Name of the quantity : " + self.name + "\n" \
-             "   Constructed from binary files : " + np.str(self.build_from_binary) + "\n" \
              "   Number of terms : " + np.str(self.nterms) + "\n" \
              "   Min / Max : " + np.str(self.min) + " / " + np.str(self.max) + "\n" \
              "   clr : " + np.str(self.clr) + "\n" \

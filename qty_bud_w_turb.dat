@@ -21,11 +21,6 @@
 #   marker edge color (str)
 #   marker every (int)
 #
-# If the number of terms is > 0
-#   Each item is constructed from a binary 2D file
-# If the number of terms is < 0
-#   Each item is constructed from another quantity file
-#
 Turb.
 6
 duwdxmean.dat 1.0

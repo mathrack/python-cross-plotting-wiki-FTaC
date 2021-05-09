@@ -21,13 +21,8 @@
 #   marker edge color (str)
 #   marker every (int)
 #
-# If the number of terms is > 0
-#   Each item is constructed from a binary 2D file
-# If the number of terms is < 0
-#   Each item is constructed from another quantity file
-#
 k
--3
+3
 qty_uu.dat 1.0
 qty_vv.dat 1.0
 qty_ww.dat 1.0
