@@ -17,7 +17,7 @@ $\overline{k}$ budget
 qty_bud_k_c.dat
 qty_bud_k_p.dat
 qty_bud_k_g.dat
-qty_bud_k_ps.dat
+qty_bud_k_pdiff.dat
 qty_bud_k_vdiff.dat
 qty_bud_k_eps.dat
 qty_bud_k_tdiff.dat

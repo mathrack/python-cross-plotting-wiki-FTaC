@@ -21,12 +21,12 @@
 #   marker edge color (str)
 #   marker every (int)
 #
-$PS_{k}$
+$PDiff_{33}$
 3
-qty_bud_uu_ps11.dat 1.0
-qty_bud_vv_ps22.dat 1.0
-qty_bud_ww_ps33.dat 1.0
-0.5
+dwpdzmean.dat invdt
+wmean.dat qty_dpdz.dat -1.0
+dwdzmean.dat qty_p.dat -1.0
+-2.0
 --b
 k
 5
