@@ -114,6 +114,10 @@ if False:
    fig.show()
    fig, ax = bud_u.xplot(x)
    fig.show()
+   fig, ax = bud_u.xypie(x, 0.1)
+   fig.show()
+   fig, ax = bud_u.ijpie(10, 40)
+   fig.show()
 
 # Check budget of <V>
 if False:
@@ -209,9 +213,4 @@ if False:
    fig, axs[1] = xyplot(dtdy, fig, axs[1])
    fig, axs[2] = xyplot(dtdz, fig, axs[2])
    fig.show()
-
-#
-# Read parameters for the present budget
-#
-#bud = budget(case = case, config = r"budget_u.dat")
 

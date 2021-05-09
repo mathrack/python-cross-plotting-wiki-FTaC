@@ -294,6 +294,41 @@ class budget:
       return np.array([term.ijval(i,j) for term in self.terms])
    def xyval(self, x, y):
       return np.array([term.xyval(x,y) for term in self.terms])
+   # Pie chart of the budget
+   def pie(self, array, fig = None, ax = None):
+      # Sort given labels and values
+      tmptype = [('label', '<U16'), ('val', np.float)]
+      data = np.sort(np.array(array, dtype=tmptype), order='val')
+      # Get sum(abs()) for scaling
+      scaling = np.sum(np.abs([dat[1] for dat in data]))
+      # Rescale
+      data2 = [(dat[0], np.abs(dat[1])/scaling) for dat in data]
+      # Extract labels, values and explode error
+      labels = [dat[0] for dat in data2]
+      values = [dat[1] for dat in data2]
+      explode = np.array([label=="Error" for label in labels])*0.15
+      # New figure and axes if none provided
+      if fig == None or ax == None:
+         fig, ax = plt.subplots()
+      ax.pie(values, labels=labels, explode=explode, autopct='%1.1f%%', pctdistance=0.8, startangle=90.)
+      ax.set_title("Left: negative contributions. Right: positive contributions.")
+      return fig, ax
+   # Pie chart of the budget at given location (i, j)
+   def ijpie(self, i, j, fig = None, ax = None):
+      # Plot
+      fig, ax = self.pie([(term.name, term.ijval(i,j)) for term in self.terms], fig, ax)
+      # Add suptitle
+      fig.suptitle(np.str(self.name) + " at (i,j)=(" + np.str(i) + "," + np.str(j) + ").")
+      return fig, ax
+   # Pie chart of the budget at given location (x,y)
+   def xypie(self, x, y, fig = None, ax = None):
+      # Plot
+      fig, ax = self.pie([(term.name, term.xyval(x,y)) for term in self.terms], fig, ax)
+      # Locate (x,y) and add suptitle
+      i = np.where(np.abs(self.case.xx-x) == np.amin(np.abs(self.case.xx-x)))[0][0]
+      j = np.where(np.abs(self.case.yy-y) == np.amin(np.abs(self.case.yy-y)))[0][0]
+      fig.suptitle(np.str(self.name) + " at (x,y)=(" + np.str(self.case.xx[i]) + "," + np.str(self.case.yy[j]) + ").")
+      return fig, ax
    #
    # Add basic and detailed description
    #
