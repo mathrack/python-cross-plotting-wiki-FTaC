@@ -157,6 +157,25 @@ class quantity:
          self.markevery = 'none'
    
    #
+   # Add post-processing
+   #
+   def iplot(self, i, fig = None, ax = None):
+      return iplot(i, self, fig, ax)
+   def jplot(self, j, fig = None, ax = None):
+      return jplot(j, self, fig, ax)
+   def xplot(self, x, fig = None, ax = None):
+      return xplot(x, self, fig, ax)
+   def yplot(self, y, fig = None, ax = None):
+      return yplot(y, self, fig, ax)
+   def ijval(self, i, j):
+      return ijval(i, j, self)
+   def xyval(self, x, y):
+      return xyval(x, y, self)
+   def xyplot(self, fig = None, ax = None):
+      return xyplot(self, fig, ax)
+   def xyctr(self, fig = None, ax = None):
+      return xyctr(self, fig, ax)
+   #
    # Add basic and detailed description
    #
    def __repr__(self):
