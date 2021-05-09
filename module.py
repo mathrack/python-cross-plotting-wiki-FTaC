@@ -193,69 +193,118 @@ class quantity:
              "   markevery : " + np.str(self.markevery)
 
 #
-# Create a class for a given budget TODO
+# Create a class for a given budget
 #
 class budget:
    #
    # Initialize with a config file
    #
-   def __init__(self, case, config, title = "", xlab = "", ylab = ""):
+   def __init__(self, case, config):
       # Corresponding setup
       self.case = case
       # Name of the config file
       self.config = np.str(config)
-      # Default title for plots
-      self.title = title
-      # Default xlabel for 2D plots
-      self.xlab = xlab
-      # Default ylabel for 2D plots
-      self.ylab = ylab
       #
       # Read the config file
       #   Comment line(s) start with '#'
       #   Followed by some mandatory fields
-      #     number of terms in the budget
-      #     the config file for each term (one config file per line)
-      #   And some optional fields
-      #      title
-      #      xlab
-      #      ylab
+      #     Name of the budget
+      #     the quantity file for each term
+      #     "Y" or "N" to compute the error
       #
-      tmp = np.loadtxt(self.config, dtype=str)
+      tmp = []
+      for line in open(self.config,"r").read().splitlines():
+         if line[0] != "#":
+            tmp.append(line)
+      # Name
+      self.name = np.str(tmp[0])
       # Number of terms in the budget
-      self.nterms = np.int(tmp[0])
+      self.nterms = np.int(len(tmp)-2)
       # List of the terms
       self.qty_list = tmp[1:self.nterms+1]
       # Build each term in the budget
       self.terms = []
       for term in self.qty_list:
-         terms.append(quantity(case, term))
+         self.terms.append(quantity(case, term))
       
-      # Config file can provide title, xlab and ylab if they are not provided in python
-      if self.title == "" and len(tmp)==self.nterms+4:
-         self.title = config_title
-      
-      if self.xlab == "" and len(tmp)==self.nterms+4:
-         self.xlab = config_xlab
-      
-      if self.ylab == "" and len(tmp)==self.nterms+4:
-         self.ylab = config_ylab
+      # Compute the error ?
+      if tmp[-1]=="Y" or tmp[-1]=="y":
+         self.nterms = self.nterms + 1
+         error = quantity.__new__(quantity)
+         error.case = case
+         error.config = "Auto"
+         error.name = "Error"
+         error.nterms = self.nterms - 1
+         error.data = np.zeros((case.nx, case.ny))
+         for term in self.terms:
+            error.data = error.data + term.data
+         error.min = np.min(error.data)
+         error.max = np.max(error.data)
+         error.absmax = np.max(np.abs(error.data))
+         error.clr = ":k"
+         error.mrkedgeclr = 'none'
+         error.mrkfaceclr = 'none'
+         error.markevery = 'none'
+         self.terms.append(error)
    
+   #
+   # Add post-processing
+   #
+   def iplot(self, i, fig = None, ax = None):
+      # New figure and axes if none provided
+      if fig == None or ax == None:
+         fig, ax = plt.subplots()
+      # Plot all terms
+      for term in self.terms:
+         fig, ax = term.iplot(i, fig, ax)
+      ax.set_ylabel(self.name)
+      ax.legend()
+      return [fig, ax]
+   def jplot(self, j, fig = None, ax = None):
+      # New figure and axes if none provided
+      if fig == None or ax == None:
+         fig, ax = plt.subplots()
+      # Plot all terms
+      for term in self.terms:
+         fig, ax = term.jplot(j, fig, ax)
+      ax.set_ylabel(self.name)
+      ax.legend()
+      return [fig, ax]
+   def xplot(self, x, fig = None, ax = None):
+      # New figure and axes if none provided
+      if fig == None or ax == None:
+         fig, ax = plt.subplots()
+      # Plot all terms
+      for term in self.terms:
+         fig, ax = term.xplot(x, fig, ax)
+      ax.set_ylabel(self.name)
+      ax.legend()
+      return [fig, ax]
+   def yplot(self, y, fig = None, ax = None):
+      # New figure and axes if none provided
+      if fig == None or ax == None:
+         fig, ax = plt.subplots()
+      # Plot all terms
+      for term in self.terms:
+         fig, ax = term.yplot(y, fig, ax)
+      ax.set_ylabel(self.name)
+      ax.legend()
+      return [fig, ax]
+   def ijval(self, i, j):
+      return [term.ijval(i,j) for term in self.terms]
+   def xyval(self, x, y):
+      return [term.xyval(x,y) for term in self.terms]
    #
    # Add basic and detailed description
    #
    def __repr__(self):
       return self.config
    def __str__(self):
-      return "Setup of the case associated with the budget : \n" + \
-             np.str(self.case) + "\n" \
+      return np.str(self.case) + "\n" \
              "Setup of the budget :" + "\n" \
              "   Config file : " + self.config + "\n" \
-             "   nterms : " + np.str(self.nterms) + "\n" \
-             "   terms are defined in : " + self.qty_list + "\n" \
-             "   Title : " + self.title + "\n" \
-             "   xlabel : " + self.xlabel + "\n" \
-             "   ylabel : " + self.ylabel
+             "   Name : " + self.name + "\n" \
+             "   nterms : " + np.str(self.nterms)
 
 #
 # Plot given quantity at given location x_i for all y

@@ -56,20 +56,24 @@ u_conv = quantity(case, "qty_bud_u_conv.dat")
 u_diff = quantity(case, "qty_bud_u_diff.dat")
 u_gradp = quantity(case, "qty_bud_u_gradp.dat")
 u_turb = quantity(case, "qty_bud_u_turb.dat")
+bud_u = budget(case, "bud_u.dat")
 
 v_conv = quantity(case, "qty_bud_v_conv.dat")
 v_diff = quantity(case, "qty_bud_v_diff.dat")
 v_gradp = quantity(case, "qty_bud_v_gradp.dat")
 v_turb = quantity(case, "qty_bud_v_turb.dat")
+bud_v = budget(case, "bud_v.dat")
 
 w_conv = quantity(case, "qty_bud_w_conv.dat")
 w_diff = quantity(case, "qty_bud_w_diff.dat")
 w_gradp = quantity(case, "qty_bud_w_gradp.dat")
 w_turb = quantity(case, "qty_bud_w_turb.dat")
+bud_w = budget(case, "bud_w.dat")
 
 t_conv = quantity(case, "qty_bud_t_conv.dat")
 t_diff = quantity(case, "qty_bud_t_diff.dat")
 t_turb = quantity(case, "qty_bud_t_turb.dat")
+bud_t = budget(case, "bud_t.dat")
 
 if False:
    x = 0.1
@@ -108,6 +112,8 @@ if False:
    ax.set_ylabel(r"Budget of $\overline{U}$")
    ax.legend()
    fig.show()
+   fig, ax = bud_u.xplot(x)
+   fig.show()
 
 # Check budget of <V>
 if False:
@@ -118,6 +124,8 @@ if False:
    fig, ax = xplot(x, v_turb, fig, ax)
    ax.set_ylabel(r"Budget of $\overline{V}$")
    ax.legend()
+   fig.show()
+   fig, ax = bud_v.xplot(x)
    fig.show()
 
 # Check budget of <W>
@@ -130,6 +138,8 @@ if False:
    ax.set_ylabel(r"Budget of $\overline{W}$")
    ax.legend()
    fig.show()
+   fig, ax = bud_w.xplot(x)
+   fig.show()
 
 # Check budget of <T>
 if False:
@@ -139,6 +149,8 @@ if False:
    fig, ax = xplot(x, t_turb, fig, ax)
    ax.set_ylabel(r"Budget of $\overline{T}$")
    ax.legend()
+   fig.show()
+   fig, ax = bud_t.xplot(x)
    fig.show()
 
 # xyplot requires Axes3D
