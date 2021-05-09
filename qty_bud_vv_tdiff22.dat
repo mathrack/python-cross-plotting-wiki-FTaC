@@ -1,0 +1,40 @@
+#
+# This fils is designed for the class "quantity"
+#
+# One quantity is the sum of terms
+# One term per line
+#
+# One term is a product of items
+# items are separated with one space
+# last item is a floating point number
+#
+# Mandatory fields
+#   name of the quantity (str)
+#   number of terms in this quantity (int)
+#   term1 (str)
+#   term2 (str)
+#   ...
+#   termn (str)
+#   scalar rescaling factor (float)
+# Optional fields
+#   linestyle (str)
+#   marker edge color (str)
+#   marker every (int)
+#
+$TDiff_{22}$
+11
+dvvudxmean.dat 1.0
+umean.dat vmean.dat dvdxmean.dat 4.0
+vmean.dat vmean.dat dudxmean.dat 2.0
+umean.dat dvvdxmean.dat -1.0
+vvmean.dat dudxmean.dat -1.0
+vmean.dat duvdxmean.dat -2.0
+uvmean.dat dvdxmean.dat -2.0
+dvvvdymean.dat 1.0
+vmean.dat vmean.dat dvdymean.dat 6.0
+vmean.dat dvvdymean.dat -3.0
+vvmean.dat dvdymean.dat -3.0
+-1.0
+-.g
+k
+5

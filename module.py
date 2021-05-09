@@ -49,6 +49,8 @@ def get_scaling(case, term):
          return -1./case.dt**2
       if term=="invre" or term=="invRe" or term=="invRE":
          return case.pr / np.sqrt(case.ra)
+      if term=="-invre" or term=="-invRe" or term=="-invRE":
+         return - case.pr / np.sqrt(case.ra)
       elif term=="invsqrtra" or term=="invsqrtRa" or term=="invsqrtRA":
          return 1./np.sqrt(case.ra)
       else:
@@ -297,7 +299,7 @@ class budget:
    # Pie chart of the budget
    def pie(self, array, fig = None, ax = None):
       # Sort given labels and values
-      tmptype = [('label', '<U16'), ('val', np.float)]
+      tmptype = [('label', '<U32'), ('val', np.float)]
       data = np.sort(np.array(array, dtype=tmptype), order='val')
       # Get sum(abs()) for scaling
       scaling = np.sum(np.abs([dat[1] for dat in data]))
