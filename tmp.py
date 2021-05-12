@@ -77,8 +77,7 @@ bud_k = budget(case, "bud_k.dat")
 #bud_vt = budget(case, "bud_vt.dat")
 
 # Load budget of temperature variance
-#TODO
-#bud_tt = budget(case, "bud_tt.dat")
+bud_tt = budget(case, "bud_tt.dat")
 
 #
 # Examples below illustrate visualization of quantities and budgets

@@ -1,0 +1,38 @@
+#
+# This fils is designed for the class "quantity"
+#
+# One quantity is the sum of terms
+# One term per line
+#
+# One term is a product of items
+# items are separated with one space
+# last item is a floating point number
+#
+# Mandatory fields
+#   name of the quantity (str)
+#   number of terms in this quantity (int)
+#   term1 (str)
+#   term2 (str)
+#   ...
+#   termn (str)
+#   scalar rescaling factor (float)
+# Optional fields
+#   linestyle (str)
+#   marker edge color (str)
+#   marker every (int)
+#
+$VDiff_{\theta \theta}$
+9
+d2phi2dxmean.dat 1.0
+dphidxmean.dat dphidxmean.dat -2.0
+phimean.dat d2phidxmean.dat -2.0
+d2phi2dymean.dat 1.0
+dphidymean.dat dphidymean.dat -2.0
+phimean.dat d2phidymean.dat -2.0
+d2phi2dzmean.dat 1.0
+dphidzmean.dat dphidzmean.dat -2.0
+phimean.dat d2phidzmean.dat -2.0
+invsqrtra
+-.k
+k
+5
