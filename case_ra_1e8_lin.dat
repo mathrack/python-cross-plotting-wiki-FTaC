@@ -10,11 +10,15 @@
 # dt (float)
 # Ra (float)
 # Pr (float)
-# Sub-folder with the results (str)
+# Sub-folder with raw results (str)
+# Sub-folder with post-processed results (str)
+# Sub-folder with figures (str)
 #
 513
 257
 7e-4
 1e8
 0.71
-data
+raw_ra1e8
+post_ra1e8
+figs_ra1e8

@@ -3,20 +3,29 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from os.path import join as ospjoin
+from os.path import isfile as opisfile
+import h5py as hp
 
 #
 # Small function to read one field
 # Returns a 2D array of size (nx, ny)
 #
-# If file starts with "qty_", the quantity constructor is used
+# If file starts with "qty_"
+#   Existing processed data is used if present
+#   Otherwise, the quantity constructor is used
 #
 # Otherwise, a binary file is read
 #
 def read_one(case, file):
    if file[:4]=="qty_":
-      output = quantity(case, file).data
+      if opisfile(ospjoin(case.postfolder, file[:-4] + ".hdf")):
+          h5f = hp.File(ospjoin(case.postfolder, file[:-4] + ".hdf"), 'r')
+          output = h5f[file[:-4]][:]
+          h5f.close()
+      else:
+         output = quantity(case, file).data
    else:
-      output = (np.fromfile(ospjoin(case.folder, file)).reshape((case.ny, case.nx))).transpose()
+      output = (np.fromfile(ospjoin(case.rawfolder, file)).reshape((case.ny, case.nx))).transpose()
    return output
 
 #
@@ -79,21 +88,25 @@ class setup:
       #     dt
       #     Ra
       #     Pr
-      #     Sub-folder with the results
+      #     Sub-folder with the raw results
+      #     Sub-folder with the processed results
+      #     Sub-folder with the figures
       #
-      [nx, ny, dt, ra, pr, data_folder] = np.loadtxt(self.config, dtype=str)
+      [nx, ny, dt, ra, pr, raw, post, fig] = np.loadtxt(self.config, dtype=str)
       self.nx = np.int(nx)
       self.ny = np.int(ny)
       self.dt = np.float(dt)
       self.ra = np.float(ra)
       self.pr = np.float(pr)
-      self.folder = np.str(data_folder)
+      self.rawfolder = np.str(raw)
+      self.postfolder = np.str(post)
+      self.figfolder = np.str(fig)
       # Here, RK3 final time step is hard-coded
       self.dt = (4./12.) * self.dt # 3./4. - 5./12.
       # Here, the size of the domain in X is hard-coded
       self.xx = np.linspace(0., 1., nx)
       # Read the Y grid, the name of the file is hard-coded
-      self.yy = np.loadtxt(ospjoin(self.folder, "yp.dat"), dtype=float)[:,1]
+      self.yy = np.loadtxt(ospjoin(self.rawfolder, "yp.dat"), dtype=float)[:,1]
    
    #
    # Add basic and detailed description
@@ -107,7 +120,9 @@ class setup:
              "   Time step : " + np.str(self.dt) + "\n" \
              "   Rayleigh number : " + np.str(self.ra) + "\n" \
              "   Prandtl number : " + np.str(self.pr) + "\n" \
-             "   Data folder : " + self.folder
+             "   Raw data folder : " + self.rawfolder + "\n" \
+             "   Post-processed data folder : " + self.postfolder + "\n" \
+             "   Figures folder : " + self.figfolder + "\n"
 
 #
 # Create a class for a given quantity
@@ -135,16 +150,25 @@ class quantity:
       self.name = np.str(tmp[0])
       # Number of terms in the quantity
       self.nterms = np.int(tmp[1])
-      # Put each term inside data
-      for iterm in range(np.abs(self.nterms)):
-         term = np.ones((case.nx, case.ny))
-         list_term = tmp[iterm+2].split()
-         for item in range(len(list_term)-1):
-            term = term * read_one(case, np.str(list_term[item]))
+      # Check if the quantity was already processed => read or compute
+      if opisfile(ospjoin(case.postfolder, self.config[:-4] + ".hdf")):
+         h5f = hp.File(ospjoin(case.postfolder, self.config[:-4] + ".hdf"), 'r')
+         self.data = h5f[self.config[:-4]][:]
+         h5f.close()
+      else:
+         # Put each term inside data
+         for iterm in range(np.abs(self.nterms)):
+            term = np.ones((case.nx, case.ny))
+            list_term = tmp[iterm+2].split()
+            for item in range(len(list_term)-1):
+               term = term * read_one(case, np.str(list_term[item]))
+            
+            self.data = self.data + term * get_scaling(case, list_term[-1])
          
-         self.data = self.data + term * get_scaling(case, list_term[-1])
-      
-      self.data = self.data * get_scaling(case, tmp[self.nterms+2])
+         self.data = self.data * get_scaling(case, tmp[self.nterms+2])
+         h5f = hp.File(ospjoin(case.postfolder, self.config[:-4] + ".hdf"), 'w')
+         h5f.create_dataset(self.config[:-4], data=self.data)
+         h5f.close()
       # Some basic metrics
       self.min = np.min(self.data)
       self.max = np.max(self.data)
