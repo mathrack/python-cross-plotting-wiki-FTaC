@@ -72,8 +72,7 @@ else:
 bud_k = budget(case, "bud_k.dat")
 
 # Load budget of turbulent heat flux
-#TODO
-#bud_ut = budget(case, "bud_ut.dat")
+bud_ut = budget(case, "bud_ut.dat")
 #bud_vt = budget(case, "bud_vt.dat")
 
 # Load budget of temperature variance

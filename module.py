@@ -66,6 +66,10 @@ def get_scaling(case, term):
          return 1./np.sqrt(case.ra)
       elif term=="-invsqrtra" or term=="-invsqrtRa" or term=="-invsqrtRA":
          return - 1./np.sqrt(case.ra)
+      elif term=="epsut":
+         return (case.pr+1.)/np.sqrt(case.ra)
+      elif term=="-epsut":
+         return -(case.pr+1.)/np.sqrt(case.ra)
       else:
          print("Error when reading the scaling factor")
          return 1.

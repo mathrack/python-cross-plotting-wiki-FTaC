@@ -1,0 +1,35 @@
+#
+# This fils is designed for the class "quantity"
+#
+# One quantity is the sum of terms
+# One term per line
+#
+# One term is a product of items
+# items are separated with one space
+# last item is a floating point number
+#
+# Mandatory fields
+#   name of the quantity (str)
+#   number of terms in this quantity (int)
+#   term1 (str)
+#   term2 (str)
+#   ...
+#   termn (str)
+#   scalar rescaling factor (float)
+# Optional fields
+#   linestyle (str)
+#   marker edge color (str)
+#   marker every (int)
+#
+$P_{u\theta}$
+6
+qty_uu.dat dphidxmean.dat 1.0
+qty_ut.dat dudxmean.dat 1.0
+qty_uv.dat dphidymean.dat 1.0
+qty_vt.dat dudymean.dat 1.0
+qty_uw.dat dphidzmean.dat 1.0
+qty_wt.dat dudzmean.dat 1.0
+-1.0
+-.r
+k
+5
