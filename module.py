@@ -331,7 +331,7 @@ class budget:
    # Pie chart of the budget
    def pie(self, array, fig = None, ax = None):
       # Sort given labels and values
-      tmptype = [('label', '<U32'), ('val', np.float)]
+      tmptype = [('label', '<U64'), ('val', np.float)]
       data = np.sort(np.array(array, dtype=tmptype), order='val')
       # Get sum(abs()) for scaling
       scaling = np.sum(np.abs([dat[1] for dat in data]))

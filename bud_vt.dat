@@ -1,0 +1,25 @@
+#
+# This file is designed for the class "budget"
+#
+# One quantity per line
+# 
+# Last line is Y or N. Flag to compute the error.
+#
+# Mandatory fields
+#   name of the budget (str)
+#   qty1 (str)
+#   qty2 (str)
+#   ...
+#   qtyn (str)
+#   Y or N (str)
+#
+$\overline{v'\theta'}$ budget
+qty_bud_vt_c.dat
+qty_bud_vt_tdiff.dat
+qty_bud_vt_dptdy.dat
+qty_bud_vt_adiff.dat
+qty_bud_vt_vdiff.dat
+qty_bud_vt_p.dat
+qty_bud_vt_eps.dat
+qty_bud_vt_pdtdy.dat
+Y
